@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#05060A" />
+  <meta name="description" content="Portfolio — Ramoji Jajam · Java · AWS · DevOps/SRE" />
+  <title>Ramoji Jajam — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #05060a; /* deep space */
+      --ink: #e8ecff; /* soft white */
+      --muted: #a9b1d6;
+      --glass: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.18);
+      --accentA: #7b5fff; /* ultraviolet */
+      --accentB: #00d1ff; /* electric cyan */
+      --accentC: #b8ff6a; /* aurora lime */
+      --shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.05);
+      --radius: 22px;
+      --maxw: 1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background: radial-gradient(1200px 800px at 10% -10%, rgba(123,95,255,.24), transparent 55%),
+                  radial-gradient(1000px 700px at 90% 110%, rgba(0,209,255,.20), transparent 60%),
+                  linear-gradient(180deg, #04050a 0%, #05060a 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    #stars, #fx {
+      position:fixed; inset:0; z-index:-3; display:block; width:100%; height:100%;
+    }
+    #fx{ z-index:-2; mix-blend-mode:screen; pointer-events:none; }
+
+    /* GLASS UI */
+    .wrap{ max-width:var(--maxw); margin:0 auto; padding:28px 20px 80px; position:relative; }
+    .nav{
+      position:sticky; top:16px; z-index:50; display:flex; gap:10px; align-items:center; justify-content:space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border:1px solid var(--border); border-radius:999px; padding:10px 14px; box-shadow:var(--shadow);
+    }
+    .brand{display:flex; gap:10px; align-items:center; font-family:Orbitron, sans-serif; letter-spacing:.6px}
+    .gem{ width:28px; height:28px; border-radius:10px; position:relative; overflow:hidden; box-shadow:0 0 30px rgba(123,95,255,.6);
+      background: conic-gradient(from 210deg, var(--accentA), var(--accentB), var(--accentC), var(--accentA)); }
+    .navlinks{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+      background:rgba(255,255,255,.06); border:1px solid var(--border);
+      text-decoration:none; font-weight:600; font-size:14px; letter-spacing:.2px;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .chip:hover{ transform:translateY(-1px); box-shadow:0 10px 24px rgba(0,0,0,.35); background:rgba(255,255,255,.10) }
+
+    .hero{ margin-top:22px; position:relative; border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      border:1px solid var(--border); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      padding:42px 28px; box-shadow: var(--shadow);
+      overflow: clip;
+    }
+    .hero::after{ /* glossy sweep */
+      content:""; position:absolute; inset:-40% -10% auto -10%; top:-30%; height:120%;
+      background: radial-gradient(closest-side, rgba(255,255,255,.28), transparent 60%);
+      transform: translate3d(0,0,0) rotate(10deg); filter: blur(35px); opacity:.25;
+    }
+    h1{
+      font-family: Orbitron, sans-serif; font-weight:800; font-size:clamp(28px, 7vw, 64px); line-height:1.02;
+      margin:0 0 8px; text-shadow: 0 0 22px rgba(0,209,255,.20);
+    }
+    .subtitle{ color:var(--muted); font-weight:600; letter-spacing:.3px; margin-bottom:18px }
+    .ctas{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; padding:12px 16px; font-weight:700; letter-spacing:.3px;
+      border-radius:14px; border:1px solid var(--border); text-decoration:none; background:rgba(255,255,255,.06);
+      box-shadow:var(--shadow); transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn.primary{
+      background: radial-gradient(120% 180% at 0% 0%, rgba(123,95,255,.30), transparent),
+                  radial-gradient(120% 180% at 120% 0%, rgba(0,209,255,.30), transparent),
+                  rgba(255,255,255,.10);
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow:0 14px 30px rgba(0,0,0,.45); background:rgba(255,255,255,.12)}
+    .grid{ display:grid; grid-template-columns: 1fr; gap:16px; margin-top:18px }
+    @media (min-width:840px){ .grid{ grid-template-columns: 1.2fr .8fr; } }
+
+    .card{ border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid var(--border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow:var(--shadow); padding:22px; position:relative; overflow:hidden; }
+    .card h2{ font-family:Orbitron, sans-serif; font-size:20px; letter-spacing:.3px; margin:0 0 12px }
+    .card .muted{ color:var(--muted); }
+
+    /* EXPERIENCE TIMELINE */
+    .timeline{ position:relative; padding-left:18px; }
+    .timeline::before{ content:""; position:absolute; left:5px; top:2px; bottom:0; width:2px; background:linear-gradient(var(--accentB), var(--accentA)); opacity:.6 }
+    .job{ position:relative; margin:18px 0; padding-left:10px }
+    .job::before{ content:""; position:absolute; left:-6px; top:6px; width:12px; height:12px; border-radius:999px; background:linear-gradient(180deg,var(--accentB),var(--accentA)); box-shadow: 0 0 14px rgba(123,95,255,.9) }
+    .job h3{ margin:0; font-size:16px }
+    .job .meta{ color:var(--muted); font-size:13px; margin:4px 0 8px }
+    .job ul{ margin:0; padding-left:18px; display:grid; gap:6px }
+
+    /* SKILLS */
+    .tags{ display:flex; flex-wrap:wrap; gap:8px }
+    .tag{ font-weight:700; font-size:12px; letter-spacing:.3px; padding:8px 10px; border-radius:999px; border:1px solid var(--border);
+          background:rgba(255,255,255,.06); }
+
+    /* EDUCATION & CERTS */
+    .edu, .cert{ display:grid; gap:4px; margin-bottom:12px }
+    .edu .where{ font-weight:700 }
+
+    footer{ margin:30px auto 0; max-width:var(--maxw); padding:30px 20px 60px; color:#9aa3c8; text-align:center }
+
+    /* TOC bubble */
+    .toc{
+      position:fixed; right:16px; bottom:16px; z-index:30; display:flex; gap:8px; flex-direction:column;
+    }
+    .toc a{ display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:999px;
+            background:rgba(255,255,255,.08); border:1px solid var(--border); text-decoration:none; font-weight:900 }
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0 }
+  </style>
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary">
+      <div class="brand"><span class="gem" aria-hidden="true"></span><span>Ramoji Jajam</span></div>
+      <div class="navlinks" role="navigation">
+        <a class="chip" href="#about">About</a>
+        <a class="chip" href="#experience">Experience</a>
+        <a class="chip" href="#skills">Skills</a>
+        <a class="chip" href="#education">Education</a>
+        <a class="chip" href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="about">
+      <h1><span style="background: linear-gradient(90deg, var(--accentB), var(--accentA), var(--accentC)); -webkit-background-clip:text; background-clip:text; color:transparent">Java · AWS · DevOps/SRE</span><br>Ramoji Jajam</h1>
+      <div class="subtitle" id="summary"></div>
+      <div class="ctas">
+        <a class="btn primary" id="resumeLink" href="#" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download Resume
+        </a>
+        <a class="btn" id="emailLink" href="#">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6"/></svg>
+          Email
+        </a>
+        <a class="btn" id="linkedInLink" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9v9M6 6v0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M10 9v9m0-6.2c0-2.9 4-3.1 4 0V18m0-5.2c0-2.9 4-3.1 4 0V18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card" id="experience">
+        <h2>Experience</h2>
+        <div class="timeline" id="experienceList"></div>
+      </section>
+
+      <section class="card" id="skills">
+        <h2>Skills</h2>
+        <div id="skillGroups"></div>
+      </section>
+
+      <section class="card" id="education">
+        <h2>Education & Certifications</h2>
+        <div id="educationList"></div>
+        <div id="certList"></div>
+      </section>
+
+      <section class="card" id="contact">
+        <h2>Contact</h2>
+        <p class="muted">Based in the USA · Open to opportunities</p>
+        <div class="tags" id="contactTags"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toc" aria-label="Quick actions">
+    <a href="#about" title="Top" aria-label="Back to top">↑</a>
+    <a href="#experience" title="Experience" aria-label="Go to experience">⟲</a>
+  </div>
+
+  <!-- ========= RESUME DATA (EDIT ME) ========= -->
+  <script id="resume-data" type="application/json">
+  {
+    "name": "Ramoji Jajam",
+    "title": "Java AWS Developer (DevOps/SRE)",
+    "location": "USA",
+    "phone": "+1 (314) 319-7504",
+    "email": "chathrapathilakshmi.jajam@slu.edu",
+    "linkedin": "https://www.linkedin.com/in/jajamchlramoji",
+    "resume_pdf": "Ramoji - Systems Engineer.pdf",
+    "summary": "Java AWS Developer (DevOps/SRE) with 5+ years building and operating cloud-native platforms and microservices. Leads Kubernetes-based deployments and Golang/Java services on AWS with IaC (CloudFormation, Helm) and CI/CD (GitLab, Jenkins, GitHub Actions) to improve release reliability and recovery times—reduced release errors by 40% and optimized database performance by ~35% while supporting latency-sensitive APIs handling daily requests. Designs repeatable infrastructure patterns, observability (CloudWatch, Sysdig, Splunk), and event-driven pipelines (SNS/SQS, Pub/Sub) to enable stream processing and high availability. Drives SRE practices, performance tuning, incident/root-cause analysis, and production stability across containers and services.",
+    "experience": [
+      {
+        "company": "MetLife",
+        "role": "Programmer Analyst",
+        "place": "USA",
+        "dates": "Jan 2025 – Present",
+        "bullets": [
+          "Led design & production deployment of streaming + batch data pipelines (AWS Glue, Apache NiFi, Snowflake, Kafka, Spark) delivering 45% throughput gain and 35% lower latency.",
+          "Engineered AWS infra via CloudFormation (IAM, networking, Glue, Redshift) for least-privilege, auditable provisioning.",
+          "Optimized cost/perf by migrating to Amazon Redshift, rightsizing compute, and tuning partitions/queries (30% cost ↓, 40% faster queries).",
+          "Built CI/CD (Jenkins/GitLab) with automated tests and validation gates to improve release reliability for critical data services.",
+          "Implemented observability (SLOs, CloudWatch/Sysdig/Splunk) to improve time-to-detect and drive post-mortems with action items.",
+          "Standardized envs with CloudFormation + Helm (IAM, networking, data jobs) to reduce drift and enable repeatable rollouts.",
+          "Authored a Go utility (goroutines/channels) to validate pipeline configs & publish to SQS; pre-deploy checks 15m → 2m.",
+          "Delivered stakeholder-facing analytics (Power BI) enabling real-time claims tracking; 60% faster report cycles.",
+          "Containerized & deployed to EKS with Helm (rolling updates, HPA, config/secret mgmt), cutting deployment issues by 40%."
+        ]
+      },
+      {
+        "company": "Magna InfoTech",
+        "role": "Software Developer / Programmer Analyst",
+        "place": "India",
+        "dates": "Mar 2023 – Jul 2023",
+        "bullets": [
+          "Modernized legacy ETL on SSIS/Talend with Oracle PL/SQL; ~30% faster data-load times across workflows.",
+          "Built & maintained Java REST services to improve secure, consistent data exchange; ~20% faster read/query responsiveness.",
+          "Optimized SQL (indexes, partitioning) for ~40% faster report generation; drove Agile delivery with code quality gates.",
+          "Documented runbooks & deploy steps, reducing handoff friction between dev and ops teams."
+        ]
+      },
+      {
+        "company": "Infosys Ltd",
+        "role": "Systems Engineer",
+        "place": "India",
+        "dates": "Nov 2020 – Feb 2023",
+        "bullets": [
+          "Engineered backend services & automation (Java, SQL, Shell), improving responsiveness/robustness by ~25%.",
+          "Unified data access across SQL Server, MongoDB, PostgreSQL for analytics/reporting across 10+ enterprise clients.",
+          "Built CI/CD with Jenkins, Git, Docker—build/test gates & automated deploys reduced release errors by ~40%.",
+          "Elevated data viz with Tableau/Looker; +35% report accuracy via model/version control & feedback loops.",
+          "Hardened quality via JUnit/Postman tests; standardized branching; 95%+ defect-free releases."
+        ]
+      },
+      {
+        "company": "XLogic",
+        "role": "Systems Analyst",
+        "place": "India",
+        "dates": "Jan 2019 – Oct 2020",
+        "bullets": [
+          "Translated 100+ business requirements into deployment-ready designs/specs; release cycles 20% faster.",
+          "Standardized Informatica PowerCenter workflows (validation, mappings) reducing rework by 30%.",
+          "Designed ER & dimensional models for OLAP across 5+ departments; improved data consistency and reporting.",
+          "Led UAT, defect triage, RCA; corrective actions cut post-deploy issues by 50%."
+        ]
+      }
+    ],
+    "skills": [
+      {"group":"Programming & Scripting","items":["Java","Kotlin","Python","Golang","JavaScript","TypeScript"]},
+      {"group":"Databases","items":["PostgreSQL","MySQL","Oracle","MariaDB","Cassandra","SQLite","MongoDB","Hibernate ORM","JDBC"]},
+      {"group":"API & Integration","items":["REST APIs","Microservices","OAuth2","JWT","Pub/Sub APIs","Kafka","SNS/SQS","Bonita BPM","RHPAM","Integration Testing"]},
+      {"group":"Observability","items":["Splunk","CloudWatch","Sysdig"]},
+      {"group":"Cloud Platforms","items":["AWS (EC2, EKS, S3, Lambda, API Gateway, VPC, IAM, Route 53, CloudWatch)"]},
+      {"group":"Data Modeling & Analysis","items":["JPA/Hibernate","JDBC","UML/ER modeling"]},
+      {"group":"Testing","items":["JUnit","Mockito","TestNG","JMeter","Postman","Swagger"]},
+      {"group":"Tools","items":["IntelliJ","Android Studio","VS Code","Visual Studio","Jira","Confluence","Power BI"]},
+      {"group":"Version Control & CI/CD","items":["Git","Jenkins","GitHub Actions","Docker","Kubernetes","Helm","SonarQube","CloudFormation"]},
+      {"group":"Methodologies & Soft Skills","items":["Agile (Scrum)","SDLC","Waterfall","Analytical Thinking","Stakeholder Communication","Team Collaboration","Technical Documentation"]}
+    ],
+    "education": [
+      {"degree":"M.S. in Information Systems","school":"Saint Louis University","place":"St. Louis, MO, USA","dates":"Aug 2023 – May 2025"},
+      {"degree":"B.Tech in Electronics & Communication Engineering","school":"Amrita School of Engineering","place":"Bangalore, Karnataka, India","dates":"Jul 2016 – May 2020"}
+    ],
+    "certifications": [
+      {"name":"Google Data Analytics"}
+    ]
+  }
+  </script>
+
+  <script>
+    // ===== Parse Data & Populate =====
+    const DATA = JSON.parse(document.getElementById('resume-data').textContent.trim());
+
+    // Summary
+    document.title = `${DATA.name} — Portfolio`;
+    document.getElementById('summary').textContent = DATA.summary;
+
+    // CTAs
+    const resumeLink = document.getElementById('resumeLink');
+    resumeLink.href = DATA.resume_pdf || '#';
+    resumeLink.setAttribute('download', (DATA.resume_pdf || 'resume.pdf'));
+
+    const emailLink = document.getElementById('emailLink');
+    emailLink.href = `mailto:${DATA.email}`;
+
+    const linkedInLink = document.getElementById('linkedInLink');
+    linkedInLink.href = DATA.linkedin;
+
+    // Experience
+    const expEl = document.getElementById('experienceList');
+    DATA.experience.forEach(job => {
+      const wrap = document.createElement('article');
+      wrap.className = 'job';
+      wrap.innerHTML = `
+        <h3>${job.role} · ${job.company}</h3>
+        <div class="meta">${job.place} · ${job.dates}</div>
+        <ul>${job.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+      `;
+      expEl.appendChild(wrap);
+    });
+
+    // Skills
+    const skillWrap = document.getElementById('skillGroups');
+    DATA.skills.forEach(g => {
+      const c = document.createElement('div');
+      c.style.marginBottom = '14px';
+      c.innerHTML = `<div class="muted" style="font-weight:800; margin-bottom:8px">${g.group}</div>`+
+                     `<div class="tags">${g.items.map(i => `<span class='tag'>${i}</span>`).join('')}</div>`;
+      skillWrap.appendChild(c);
+    });
+
+    // Education + Certs
+    const eduList = document.getElementById('educationList');
+    DATA.education.forEach(e => {
+      const div = document.createElement('div');
+      div.className = 'edu';
+      div.innerHTML = `<div class='where'>${e.degree}</div><div>${e.school}</div><div class='muted'>${e.place} · ${e.dates}</div>`;
+      eduList.appendChild(div);
+    });
+
+    const certList = document.getElementById('certList');
+    DATA.certifications.forEach(c => {
+      const div = document.createElement('div');
+      div.className = 'cert';
+      div.innerHTML = `<div>• ${c.name}</div>`;
+      certList.appendChild(div);
+    });
+
+    // Contact chips
+    const contactTags = document.getElementById('contactTags');
+    const contactItems = [
+      { label: 'Email', value: DATA.email, href: `mailto:${DATA.email}` },
+      { label: 'Phone', value: DATA.phone, href: `tel:${DATA.phone.replace(/[^+\d]/g,'')}` },
+      { label: 'LinkedIn', value: DATA.linkedin.replace('https://',''), href: DATA.linkedin }
+    ];
+    contactItems.forEach(x => {
+      const a = document.createElement('a');
+      a.className = 'chip'; a.href = x.href; a.target = x.label === 'LinkedIn' ? '_blank' : '_self'; a.rel = 'noopener';
+      a.innerHTML = `<strong>${x.label}:</strong>&nbsp;${x.value}`;
+      contactTags.appendChild(a);
+    });
+  </script>
+
+  <script>
+    // ===== Starfield Animation (twinkling parallax) =====
+    const starCanvas = document.getElementById('stars');
+    const ctx = starCanvas.getContext('2d');
+    const fxCanvas = document.getElementById('fx');
+    const fxc = fxCanvas.getContext('2d');
+
+    let stars = []; let W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const STAR_COUNT = 360; // balanced for perf
+
+    function resize(){
+      W = starCanvas.width = Math.floor(window.innerWidth * DPR);
+      H = starCanvas.height = Math.floor(window.innerHeight * DPR);
+      fxCanvas.width = W; fxCanvas.height = H;
+      ctx.setTransform(1,0,0,1,0,0); fxc.setTransform(1,0,0,1,0,0);
+      generateStars();
+    }
+
+    function rand(min, max){ return Math.random() * (max - min) + min }
+
+    function generateStars(){
+      stars = new Array(STAR_COUNT).fill(0).map(() => ({
+        x: rand(0, W),
+        y: rand(0, H),
+        r: rand(0.4, 1.8) * DPR,
+        a: rand(0.35, 0.9),
+        tw: rand(0.0020, 0.0055),
+        off: rand(0, 6.28),
+        vx: rand(-0.02, 0.02) * DPR,
+        vy: rand(-0.02, 0.02) * DPR
+      }));
+    }
+
+    function drawStars(t){
+      ctx.clearRect(0,0,W,H);
+      for(const s of stars){
+        s.x += s.vx; s.y += s.vy;
+        if(s.x < 0) s.x += W; else if(s.x > W) s.x -= W;
+        if(s.y < 0) s.y += H; else if(s.y > H) s.y -= H;
+        const twinkle = s.a + Math.sin(t * s.tw + s.off) * 0.35;
+        ctx.beginPath(); ctx.globalAlpha = Math.max(0.05, Math.min(1, twinkle));
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        const grad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r*2);
+        grad.addColorStop(0, 'rgba(255,255,255,1)');
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = grad; ctx.fill();
+      }
+    }
+
+    // Nebula glow / galaxy wisps
+    function drawNebula(t){
+      fxc.clearRect(0,0,W,H);
+      const blobs = 5;
+      for(let i=0;i<blobs;i++){
+        const x = (Math.sin(t*0.0002 + i) * 0.35 + 0.5) * W;
+        const y = (Math.cos(t*0.00025 + i*1.7) * 0.35 + 0.5) * H;
+        const r = (Math.sin(t*0.00015 + i) * 0.2 + 0.55) * Math.min(W, H) * 0.6;
+        const g = fxc.createRadialGradient(x,y,0, x,y,r);
+        const hueA = 270 + i*12; // purple
+        const hueB = 190 + i*10; // cyan
+        g.addColorStop(0, `hsla(${hueA}, 100%, 70%, 0.10)`);
+        g.addColorStop(1, `hsla(${hueB}, 100%, 50%, 0.0)`);
+        fxc.globalCompositeOperation = 'lighter';
+        fxc.fillStyle = g; fxc.beginPath(); fxc.arc(x,y,r,0,Math.PI*2); fxc.fill();
+      }
+    }
+
+    let start = performance.now();
+    function frame(now){
+      const t = now - start;
+      drawStars(t); drawNebula(t);
+      requestAnimationFrame(frame);
+    }
+
+    window.addEventListener('resize', resize, { passive:true });
+    resize(); requestAnimationFrame(frame);
+
+    // Smooth in-page scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({ behavior:'smooth', block:'start' }); }
+      })
+    });
+  </script>
+
+  <footer>
+    Built with ❤️ on a galaxy of pure HTML · CSS · JS. © <span id="year"></span> <span id="me"></span>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear(); document.getElementById('me').textContent = DATA.name;</script>
+</body>
+</html>
